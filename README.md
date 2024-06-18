@@ -112,15 +112,15 @@ This Terraform module creates an AWS VPC with 2 public subnets and 4 private sub
 | count                 | number of nat gateways, route tables and eips created   |
 
 - Usage  
- ```
-module "nat" {
-    source = "../modules/nat"
-    public_subnets_ids = module.vpc.public_subnets_ids
-    private_subnets_ids = module.vpc.private_subnets_ids
-    vpc_id = module.vpc.vpc_id
-    count = module.vpc.public_subent_count
-}
- ```
+    ```
+    module "nat" {
+        source = "../modules/nat"
+        public_subnets_ids = module.vpc.public_subnets_ids
+        private_subnets_ids = module.vpc.private_subnets_ids
+        vpc_id = module.vpc.vpc_id
+        count = module.vpc.public_subent_count
+    }
+    ```
 
 ## sg
  This module creates security groups for the alb , webservers and database        
