@@ -1,4 +1,5 @@
-# Project Overview
+# AWS Two-Tier Deployment with Terraform
+
 This project aims to develop scalable and secure AWS resources to deploy a two-tier application, utilizing Terraform for automated provisioning. The approach adheres to best practices in Terraform coding and architectural design principles.
 ## Table of Contents
 
@@ -35,7 +36,7 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 ## Features and best practices
 
 - Grouping related resources into modules to simplify code organization and Management.
-- Defining variables in the ```variables.tfvars``` file.
+- Defining variables in the ```terraform.tfvars``` file.
 - Outputting  values that might be required by other configurations or modules.
 - Utilizing 2 availability zones to ensure high availability and fault tolerance.
 - Employing separate security groups for different application tiers and resources.

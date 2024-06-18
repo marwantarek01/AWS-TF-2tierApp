@@ -29,3 +29,7 @@ variable "instance_type" {}
 variable "max_size" {}
 variable "min_size" {}
 variable "desired_cap" {}
+
+variable "appname" {
+  
+}
