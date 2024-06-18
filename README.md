@@ -1,4 +1,4 @@
-# AWS Two-Tier Deployment with Terraform
+# AWS 2-Tier WebbApp Deployment with Terraform
 
 This project aims to develop scalable and secure AWS resources to deploy a two-tier application, utilizing Terraform for automated provisioning. The approach adheres to best practices in Terraform coding and architectural design principles.
 ## Table of Contents
