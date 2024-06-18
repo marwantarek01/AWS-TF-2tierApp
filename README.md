@@ -20,7 +20,8 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 
 
 ## Architecture
-inster pic
+
+![Arhcitecture](https://github.com/marwantarek01/assets/blob/main/aws%20proj%20(1).png)
 
 - The architecture leverages Amazon Route 53 for DNS management, directing traffic to Amazon CloudFront.  
 - CloudFront forwards requests to an Application Load Balancer (ALB), which distributes traffic across EC2 instances housed in private subnets.
@@ -138,12 +139,12 @@ module "nat" {
 | db_sg_id              | The db security group ID                                |
 
 - Usage  
- ```
- module "sg" {
-    source = "../modules/sg"
-    vpc_id = module.vpc.vpc_id
-}
- ```
+    ```
+    module "sg" {
+        source = "../modules/sg"
+        vpc_id = module.vpc.vpc_id
+    }
+    ```
 ## key
 This module creates Key pair to enable SSH access for the EC2 instances.
 
@@ -154,12 +155,12 @@ This module creates Key pair to enable SSH access for the EC2 instances.
 | key_name              | Key pair name for SSH access                            |
 
 - Usage  
- ```
-module "key" {
-    source = "../modules/key"
-  
-}
-```
+    ```
+    module "key" {
+        source = "../modules/key"
+    
+    }
+    ```
 ## alb
  This module creates application loadbalancer with target groups and alb listener.    
 
@@ -179,15 +180,15 @@ module "key" {
 | alb_id                | The alb ID                                              |
 
 - Usage  
- ```
-module "alb" {
-    source = "../modules/alb"
-    vpc_id = module.vpc.vpc_id
-    alb_sg_id = module.sg.alb_sg_id
-    public_subnets_ids = module.vpc.public_subnets_ids
-  
-}
- ```
+    ```
+    module "alb" {
+        source = "../modules/alb"
+        vpc_id = module.vpc.vpc_id
+        alb_sg_id = module.sg.alb_sg_id
+        public_subnets_ids = module.vpc.public_subnets_ids
+    
+    }
+    ```
 
 ## as
  This module sets up a complete auto-scaling environment with an EC2 launch template, an auto-scaling group, policies, and alarms to dynamically adjust the number of instances based on CPU utilization    
@@ -208,21 +209,21 @@ module "alb" {
 
 
 - Usage  
- ```
- module "as" {
-    source = "../modules/as"
-    ami = var.ami
-    instance_type = var.instance_type
-    max_size = var.max_size
-    min_size = var.min_size
-    desired_cap = var.desired_cap
-    client_sg_id = module.sg.client_sg_id
-    key_name = module.key.key_name
-    private_subnets_ids = module.vpc.private_subnets_ids
-    alb_tg_arn = module.alb.alb_tg_arn
-  
-}
- ```
+    ```
+    module "as" {
+        source = "../modules/as"
+        ami = var.ami
+        instance_type = var.instance_type
+        max_size = var.max_size
+        min_size = var.min_size
+        desired_cap = var.desired_cap
+        client_sg_id = module.sg.client_sg_id
+        key_name = module.key.key_name
+        private_subnets_ids = module.vpc.private_subnets_ids
+        alb_tg_arn = module.alb.alb_tg_arn
+    
+    }
+    ```
 ## rds
  This module creates Amazon RDS in a primary-standby setup.
 
@@ -238,16 +239,16 @@ module "alb" {
 
 
 - Usage  
- ```
-module "rds_db" {
-    source = "../modules/rds"
-    private_subnets_ids = module.vpc.private_subnets_ids
-    db_name = var.db_name
-    db_password = var.db_password
-    db_username = var.db_username
-    db_sg_id = module.sg.db_sg_id
-}
- ```
+    ```
+    module "rds_db" {
+        source = "../modules/rds"
+        private_subnets_ids = module.vpc.private_subnets_ids
+        db_name = var.db_name
+        db_password = var.db_password
+        db_username = var.db_username
+        db_sg_id = module.sg.db_sg_id
+    }
+    ```
 ## cloudfront
  This module creates an AWS CloudFront distribution that uses an Application Load Balancer (ALB) as its origin.
 
@@ -266,13 +267,13 @@ module "rds_db" {
 |cloudfront_domain_name | domain name of AWS CloudFront distribution  |
 
 - Usage  
- ```
-module "cloudfront" {
-    source = "../modules/cloudfront"
-    alb_dns_name = module.alb.alb_dns_name
-    alb_id = module.alb.alb_id
-}
- ```
+    ```
+    module "cloudfront" {
+        source = "../modules/cloudfront"
+        alb_dns_name = module.alb.alb_dns_name
+        alb_id = module.alb.alb_id
+    }
+    ```
 ## route 53
  This module creates and configures a DNS record in AWS Route 53 to point to a CloudFront distribution
 
@@ -285,13 +286,13 @@ module "cloudfront" {
 |appname                | domain name for the Route 53 hosted zone                 |
 
 - Usage  
- ```
-module "route53" {
-    source = "../modules/route53"
-    cloudfront_zoneID = module.cloudfront.cloudfront_zoneID
-    cloudfront_domain_name = module.cloudfront.cloudfront_domain_name  
-}
- ```
+    ```
+    module "route53" {
+        source = "../modules/route53"
+        cloudfront_zoneID = module.cloudfront.cloudfront_zoneID
+        cloudfront_domain_name = module.cloudfront.cloudfront_domain_name  
+    }
+    ```
 
 
 #  Create terraform.tfvars file 
