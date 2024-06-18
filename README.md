@@ -1,5 +1,5 @@
 # Project Overview
-This project aims to develop scalable and secure AWS resources to deploy a two-tier application, utilizing Terraform for automated provisioning. The approach adheres to best practices in Terraform coding and architectural design principles
+This project aims to develop scalable and secure AWS resources to deploy a two-tier application, utilizing Terraform for automated provisioning. The approach adheres to best practices in Terraform coding and architectural design principles.
 ## Table of Contents
 
 1. [ Architecture](#architecture)
@@ -90,14 +90,14 @@ This Terraform module creates an AWS VPC with 2 public subnets and 4 private sub
 | public_subent_count   | number of public subnets created                 |
 
 - Usage  
- ```
- module "vpc" {
-    source = "../modules/vpc"
-    vpc_cidr             = var.vpc_cidr
-    private_subnet_cidrs = var.private_subnet_cidrs
-    public_subnet_cidrs  = var.public_subnet_cidrs   
-}
- ```
+    ```
+    module "vpc" {
+        source = "../modules/vpc"
+        vpc_cidr             = var.vpc_cidr
+        private_subnet_cidrs = var.private_subnet_cidrs
+        public_subnet_cidrs  = var.public_subnet_cidrs   
+    }
+    ```
  ## nat
  This module creates NAT Gateways, elastic IPs and route tables to enable outbound internet access for the private instances without exposing them directly to the internet.                   
 
