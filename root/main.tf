@@ -71,6 +71,7 @@ module "route53" {
     source = "../modules/route53"
     cloudfront_zoneID = module.cloudfront.cloudfront_zoneID
     cloudfront_domain_name = module.cloudfront.cloudfront_domain_name
+    appname = var.appname
   
 }
 

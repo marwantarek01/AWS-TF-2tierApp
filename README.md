@@ -1,7 +1,7 @@
-# AWS 2-Tier WebbApp Deployment with Terraform
+# AWS 2-Tier WebbApp Deployment with Terraform 
 
 This project aims to develop scalable and secure AWS resources to deploy a two-tier application, utilizing Terraform for automated provisioning. The approach adheres to best practices in Terraform coding and architectural design principles.
-## Table of Contents
+## Table of Contents  
 
 1. [ Architecture](#architecture)
 2. [Features and best practices](#features-and-best-practices)
@@ -22,7 +22,7 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 
 ## Architecture
 
-![Arhcitecture](https://github.com/marwantarek01/assets/blob/main/aws%20proj%20(1).png)
+![Architecture](https://github.com/marwantarek01/assets/blob/main/aws%20proj%20(1).png)
 
 - The architecture leverages Amazon Route 53 for DNS management, directing traffic to Amazon CloudFront.  
 - CloudFront forwards requests to an Application Load Balancer (ALB), which distributes traffic across EC2 instances housed in private subnets.
@@ -41,7 +41,7 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 - Utilizing 2 availability zones to ensure high availability and fault tolerance.
 - Employing separate security groups for different application tiers and resources.
 - Creating a standby RDS instance for high availability and disaster recovery.
-- Using CloudFront to cache and deliver content with low latency and high transfer speeds globally.
+- Using CloudFront to cache and deliver content with low latency and high transfer speeds globally.   
 - internet facing alb to ensure secure and efficient handling of application workloads.
 
 
@@ -71,8 +71,9 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 
 # Modules
 ## vpc 
-This Terraform module creates an AWS VPC with 2 public subnets and 4 private subnets, an internet gateway and route tables.
+- This Terraform module generates the specified number of public and private subnets based on the provided values for ```private_subnet_cidrs``` and ```public_subnet_cidrs``` specified in the ```terraform.tfvars``` file. It also includes the creation of an internet gateway and route tables for these subnets
 
+- In this project I created 2 public subnets, 4 private subnets,  internet gateway and route tables.
 
 - Inputs 
 
@@ -89,7 +90,7 @@ This Terraform module creates an AWS VPC with 2 public subnets and 4 private sub
 | vpc_id                | The VPC ID.                      |
 | private_subnets_ids   | List of IDs for private subnets.                 |
 | public_subnets_ids    | List of IDs for public subnets                   |                   
-| public_subent_count   | number of public subnets created                 |
+| public_subnet_count   | number of public subnets created                 |
 
 - Usage  
     ```
@@ -101,7 +102,8 @@ This Terraform module creates an AWS VPC with 2 public subnets and 4 private sub
     }
     ```
  ## nat
- This module creates NAT Gateways, elastic IPs and route tables to enable outbound internet access for the private instances without exposing them directly to the internet.                   
+ - This module creates NAT Gateways, elastic IPs and route tables to enable outbound internet access for the private instances without exposing them directly to the internet.    
+ - The number of NAT Gateways and  elastic IPs are equal to the number of public subnets 
 
 - Inputs 
 
@@ -124,7 +126,7 @@ This Terraform module creates an AWS VPC with 2 public subnets and 4 private sub
     ```
 
 ## sg
- This module creates security groups for the alb , webservers and database        
+ This module creates security groups for the alb , web servers and database        
 
 - Inputs 
 
@@ -192,7 +194,7 @@ This module creates Key pair to enable SSH access for the EC2 instances.
     ```
 
 ## as
- This module sets up a complete auto-scaling environment with an EC2 launch template, an auto-scaling group, policies, and alarms to dynamically adjust the number of instances based on CPU utilization    
+ This module sets up a complete auto-scaling environment with an EC2 launch template, an auto-scaling group, policies, and alarms to dynamically adjust the number of instances based on CPU utilization.   
 
 - Inputs 
 
@@ -298,6 +300,7 @@ This module creates Key pair to enable SSH access for the EC2 instances.
 
 #  Create terraform.tfvars file 
 ```
+appname = ""
 region = ""
 vpc_cidr = ""
 private_subnet_cidrs = ""
@@ -305,10 +308,9 @@ public_subnet_cidrs = ""
 db_name = ""
 db_password = ""
 db_username = ""
-ami = ""
-instance_type = ""
-max_size = 
-min_size = 
-desired_cap = 
-appname = ""
+ami = ""             # The ami used to create web servers
+instance_type = ""   # Type of the EC2 instance (e.g., t2.micro)
+max_size =           # Maximum number of web server instances that can be scaled up
+min_size =           # Minimum number of web server instances that can be scaled down
+desired_cap =        # Desired number of webservers
 ```

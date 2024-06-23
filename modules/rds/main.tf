@@ -28,3 +28,31 @@ resource "aws_db_instance" "db" {
     Name = "bookdb"
   }
 }
+
+/*
+resource "aws_db_instance" "read_replica" {
+  identifier                   = "read-replica-db"
+  instance_class               = "db.t3.micro"
+  source_db_instance_identifier = aws_db_instance.primary.id
+
+  # Optional: Customize as needed
+  publicly_accessible          = false
+  storage_type                 = "gp2"
+  db_subnet_group_name         = aws_db_instance.primary.db_subnet_group_name
+  vpc_security_group_ids       = aws_db_instance.primary.vpc_security_group_ids
+
+  # Only for MySQL, MariaDB, PostgreSQL: set a parameter group for the replica if needed
+  parameter_group_name = "default.mysql8.0"
+  
+  tags = {
+    Name = "Read Replica"
+  }
+}
+
+output "primary_endpoint" {
+  value = aws_db_instance.primary.endpoint
+}
+
+output "read_replica_endpoint" {
+  value = aws_db_instance.read_replica.endpoint
+}  */
