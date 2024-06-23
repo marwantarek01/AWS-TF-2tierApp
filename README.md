@@ -239,7 +239,13 @@ This module creates Key pair to enable SSH access for the EC2 instances.
 | private_subnets_ids   | List of IDs for private subnets                         |
 | db_username           | username for the database's master user                 |
 | db_sg_id              | Security group IDs associated with the rds              |
+| count                 | count of read replicas                        |
 
+- Outputs 
+| Variable              | Description                                             |
+|-----------------------|---------------------------------------------------------|
+| primary_endpoint      | endpoint attribute of the primary db instance       |
+| read_replica_endpoint | endpoint attribute of the read replica db instance      |
 
 - Usage  
     ```
@@ -250,6 +256,7 @@ This module creates Key pair to enable SSH access for the EC2 instances.
         db_password = var.db_password
         db_username = var.db_username
         db_sg_id = module.sg.db_sg_id
+        count = var.count
     }
     ```
 ## cloudfront
@@ -313,4 +320,5 @@ instance_type = ""   # Type of the EC2 instance (e.g., t2.micro)
 max_size =           # Maximum number of web server instances that can be scaled up
 min_size =           # Minimum number of web server instances that can be scaled down
 desired_cap =        # Desired number of webservers
+count =              # count of read replica
 ```
