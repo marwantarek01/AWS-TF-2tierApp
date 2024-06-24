@@ -228,7 +228,7 @@ This module creates Key pair to enable SSH access for the EC2 instances.
     }
     ```
 ## rds
- This module creates Amazon RDS in a primary-standby setup.
+ This module creates Amazon RDS in a primary-standby setup, I addition to the specified number of read replicas.
 
 - Inputs 
 
