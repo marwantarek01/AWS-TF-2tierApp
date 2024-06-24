@@ -242,10 +242,13 @@ This module creates Key pair to enable SSH access for the EC2 instances.
 | count                 | count of read replicas                        |
 
 - Outputs 
+
 | Variable              | Description                                             |
 |-----------------------|---------------------------------------------------------|
-| primary_endpoint      | endpoint attribute of the primary db instance       |
-| read_replica_endpoint | endpoint attribute of the read replica db instance      |
+| primary_endpoint      | endpoint attribute of the primary db instance           |
+| read_replica_endpoint  | endpoint attribute of the read replica db instance     |
+
+
 
 - Usage  
     ```
