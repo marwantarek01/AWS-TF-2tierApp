@@ -71,7 +71,7 @@ This project aims to develop scalable and secure AWS resources to deploy a two-t
 
 # Modules
 ## vpc 
-- This Terraform module generates the specified number of public and private subnets based on the provided values for ```private_subnet_cidrs``` and ```public_subnet_cidrs``` specified in the ```terraform.tfvars``` file. It also includes the creation of an internet gateway and route tables for these subnets
+- This Terraform module generates the specified number of public and private subnets based on the provided values for ```private_subnet_cidrs``` and ```public_subnet_cidrs``` specified in the ```terraform.tfvars``` file. It also includes Provisioning of internet gateway and route tables for these subnets
 
 - In this project I created 2 public subnets, 4 private subnets,  internet gateway and route tables.
 
