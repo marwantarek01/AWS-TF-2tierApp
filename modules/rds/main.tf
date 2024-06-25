@@ -33,7 +33,7 @@ resource "aws_db_instance" "db" {
 resource "aws_db_instance" "read_replica" {
   count = var.count
   instance_class               = "db.t2.micro" 
-
+  identifier              = "read-replica"
   # Optional: Customize as needed
   publicly_accessible          = false
   storage_type                 = "gp2"
@@ -41,7 +41,7 @@ resource "aws_db_instance" "read_replica" {
   vpc_security_group_ids       = [var.db_sg_id] # security group ID
   replicate_source_db = aws_db_instance.db.identifier
   tags = {
-    Name = "Read Replica"
+    Name = "Read-Replica"
   }
 }
 
