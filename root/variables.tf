@@ -33,3 +33,6 @@ variable "desired_cap" {}
 variable "appname" {
   
 }
+variable "count" {
+  description = "count of read replicas"
+}

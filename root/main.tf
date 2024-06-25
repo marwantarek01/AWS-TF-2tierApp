@@ -56,6 +56,7 @@ module "rds_db" {
     db_password = var.db_password
     db_username = var.db_username
     db_sg_id = module.sg.db_sg_id
+    count = var.count
 
   
 }

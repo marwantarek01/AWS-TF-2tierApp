@@ -29,30 +29,20 @@ resource "aws_db_instance" "db" {
   }
 }
 
-/*
+
 resource "aws_db_instance" "read_replica" {
+  count = var.count
   identifier                   = "read-replica-db"
-  instance_class               = "db.t3.micro"
-  source_db_instance_identifier = aws_db_instance.primary.id
+  instance_class               = "db.t2.micro" 
 
   # Optional: Customize as needed
   publicly_accessible          = false
   storage_type                 = "gp2"
-  db_subnet_group_name         = aws_db_instance.primary.db_subnet_group_name
-  vpc_security_group_ids       = aws_db_instance.primary.vpc_security_group_ids
-
-  # Only for MySQL, MariaDB, PostgreSQL: set a parameter group for the replica if needed
-  parameter_group_name = "default.mysql8.0"
-  
+  db_subnet_group_name         = aws_db_subnet_group.db-subnet.name
+  vpc_security_group_ids       = [var.db_sg_id] # security group ID
+  replicate_source_db = aws_db_instance.db.identifier
   tags = {
     Name = "Read Replica"
   }
 }
 
-output "primary_endpoint" {
-  value = aws_db_instance.primary.endpoint
-}
-
-output "read_replica_endpoint" {
-  value = aws_db_instance.read_replica.endpoint
-}  */

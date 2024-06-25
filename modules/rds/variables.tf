@@ -3,6 +3,9 @@ variable "private_subnets_ids" {
     type = list(string)
   
 }
+variable "count" {
+  description = "count of read replicas"
+}
 
 variable "db_username" {}
 
